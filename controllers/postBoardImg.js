@@ -1,5 +1,6 @@
 import s3Upload from "../s3/s3Upload.js"
 import imgCompressor from "../sharp/imgCompressor.js"
+import boardImgTempCleaner from "../tempCleaners/boardImgTempCleaner.js"
 
 async function postBoardImg(req,res)
 {
@@ -9,6 +10,7 @@ async function postBoardImg(req,res)
         await s3Upload(img.path,`boardImg/${img.filename}${img.extension}`,img.mimetype)
         const link = `https://interactive-board-storage.s3.eu-north-1.amazonaws.com/boardImg/${img.filename}${img.extension}`
         res.status(200).json({link})
+        boardImgTempCleaner()
     }
     catch(ex)
     {
