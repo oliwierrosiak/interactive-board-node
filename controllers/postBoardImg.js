@@ -14,14 +14,12 @@ async function postBoardImg(req,res)
         }
         else if(req.file.mimetype.includes('video/'))
         {
-            // videoCompressor(`${req.file.destination}${req.file.filename}`,`uploads/boardMedia/${req.file.filename}`)
-            file = {path:req.file.path,extension:`.${req.file.filename.split('.')[1]}`,filename:req.file.filename.split('.')[0],mimetype:req.file.mimetype}
+            file = await videoCompressor(`${req.file.destination}${req.file.filename}`,`uploads/boardMedia/${req.file.filename}`,req.file)
         }
         else
         {
             throw new Error()
         }
-        console.log(file.path)
         await s3Upload(file.path,`boardMedia/${file.filename}${file.extension}`,file.mimetype)
         const link = `https://interactive-board-storage.s3.eu-north-1.amazonaws.com/boardMedia/${file.filename}${file.extension}`
         res.status(200).json({link,mimetype:file.mimetype})

@@ -1,9 +1,9 @@
 import fs from 'fs'
 
-async function deleteFile(file) {
+async function deleteFile(path,file) {
     try
     {
-        await fs.promises.unlink(`uploads/boardMediaTemp/${file}`)
+        await fs.promises.unlink(`${path}/${file}`)
     }
     catch(ex)
     {}
@@ -16,7 +16,14 @@ async function boardMediaTempCleaner()
         {
             return null
         }
-        files.forEach(x=>deleteFile(x))
+        files.forEach(x=>deleteFile('uploads/boardMediaTemp',x))
+    })
+    fs.readdir('uploads/boardMedia',(err,files)=>{
+        if(err)
+        {
+            return null
+        }
+        files.forEach(x=>deleteFile('uploads/boardMedia',x))
     })
 }
 
