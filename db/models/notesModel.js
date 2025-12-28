@@ -12,6 +12,10 @@ const NotesModel = new mongoose.Schema({
     boardColor:{
         type:String,
         default:'bgBlack5'
+    },
+    template:{
+        type:String,
+        default:'backgroundTemplate9'
     }
 })
 
