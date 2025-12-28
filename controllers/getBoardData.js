@@ -9,7 +9,15 @@ async function getBoardData(req,res)
         {
             throw new Error()
         }
-
+        const canvas = note.content.find(x=>x.type === "canvas")
+        if(canvas)
+        {
+            const noteContent = [...note.content]
+            const idx = noteContent.findIndex(x=>x.type === 'canvas')
+            noteContent.splice(idx,1)
+            noteContent.unshift(canvas)
+            note.content = [...noteContent]
+        }
         res.status(200).json(note)
         
     }
