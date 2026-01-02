@@ -43,8 +43,46 @@ async function registerUser(req,res)
     }
     catch(ex)
     {
-        console.log(ex)
-        res.sendStatus(500)
+        const response = {
+            status:400,
+            ok:false,
+            message:"400 Invalid request - You have provided wrong data or your sent data is not complete",
+            errors:{
+                name:'',
+                email:'',
+                password:'',
+            }
+        }
+
+        for(const key in response.errors)
+        {
+            if(ex.errors?.[key]?.properties?.message)
+            {
+                response.errors[key] = ex.errors?.[key]?.properties?.message 
+
+            }
+            else
+            {
+                response.errors[key] = ''
+            }
+        }
+
+        if(ex.code == 11000)
+        {
+            for(const key in ex.keyValue)
+            {
+                if(key === "name")
+                {
+                    response.errors.name = `Nazwa jest już zajęta`
+                }
+                if(key === "email")
+                {
+                    response.errors.email = `Ten email jest już zarejestrowany`
+                }
+            }
+        }
+        res.status(400).json(response)
+        tempCleaner('userImgTemp','userImg')
     }
 }
 

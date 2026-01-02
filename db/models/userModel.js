@@ -1,17 +1,26 @@
 import mongoose from "mongoose";
 import bcrypt from 'bcrypt'
+import emailValidate from "../validators/emailValidator.js";
+import nameValidate from "./nameValidator.js";
+import passwordValidate from "../validators/passwordValidator.js";
 
 const UserModel = new mongoose.Schema({
     name:{
         type:String,
         unique:true,
+        required:[true,'Podaj nazwę'],
+        validate:[(name)=>nameValidate(name),'Nazwa jest za krótka']
     },
     email:{
         type:String,
         unique:true,
+        required:[true,'Podaj adres email'],
+        validate:[(email)=>emailValidate(email),'Wprowadź prawidłowy adres email']
     },
     password:{
-        type:String
+        type:String,
+        required:[true,'Podaj hasło'],
+        validate:[(password)=>passwordValidate(password),'Hasło jest za słabe']
     },
     img:{
         type:String,
