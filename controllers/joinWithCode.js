@@ -4,7 +4,7 @@ async function joinWithCode(req,res)
 {
     try
     {
-        const note = await Notes.findOne({code:req.params.code},"_id")
+        const note = await Notes.findOne({code:req.params.code})
         if(!note)
         {
             const error = new Error('Note not found')
@@ -13,8 +13,8 @@ async function joinWithCode(req,res)
             throw error
         }
         else
-        {
-            res.status(200).json({id:note._id})
+        { 
+            res.status(200).json({id:note._id,password:note.notePassword?true:false})
         }
     }
     catch(ex)
