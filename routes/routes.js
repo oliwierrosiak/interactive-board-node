@@ -19,6 +19,7 @@ import logout from '../auth/logout.js'
 import resetPassword from '../controllers/resetPassword.js'
 import joinWithCode from '../controllers/joinWithCode.js'
 import compareNotePassword from '../controllers/compareNotePassword.js'
+import createNote from '../controllers/createNote.js'
 
 const Router = new express.Router()
 
@@ -55,5 +56,7 @@ Router.post('/resetPassword',resetPassword)
 Router.get('/joinWithCode/:code',joinWithCode)
 
 Router.post('/compareNotePassword',compareNotePassword)
+
+Router.post('/createNote',createNote)
 
 export default Router

@@ -25,7 +25,9 @@ const NotesModel = new mongoose.Schema({
     notePassword:{
         type: String,
         default: null
-    }
+    },
+    admin:String,
+    visibility:String
 })
 
 NotesModel.pre('save',async function() {
