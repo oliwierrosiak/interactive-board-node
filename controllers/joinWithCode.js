@@ -5,8 +5,6 @@ async function joinWithCode(req,res)
     try
     {
         const note = await Notes.findOne({code:req.params.code})
-        console.log(note)
-        console.log(req.user)
         if(!note)
         {
             const error = new Error('Note not found')
@@ -16,6 +14,16 @@ async function joinWithCode(req,res)
         }
         else
         { 
+            if(note.visibility === 'private')
+            {
+                if(note.admin !== req.user)
+                {
+                    const error = new Error()
+                    error.status = 404
+                    error.mess = "Note not found"
+                    throw error
+                }
+            }
             res.status(200).json({id:note._id,password:note.notePassword?true:false})
         }
     }
