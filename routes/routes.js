@@ -24,6 +24,7 @@ import getNotes from '../controllers/getNotes.js'
 import deleteNote from '../controllers/deleteNote.js'
 import updateNote from '../controllers/updateNote.js'
 import updateUserPhoto from '../controllers/updateUserPhoto.js'
+import updateUserName from '../controllers/updateUserName.js'
 
 const Router = new express.Router()
 
@@ -70,5 +71,7 @@ Router.delete('/deleteNote/:id',verifyToken,deleteNote)
 Router.put('/updateNote/:id',verifyToken,updateNote)
 
 Router.put('/updateUserPhoto',verifyToken,userImgUploader.single('photo'),updateUserPhoto)
+
+Router.put('/updateUserName',verifyToken,updateUserName)
 
 export default Router
