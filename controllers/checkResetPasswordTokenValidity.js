@@ -5,7 +5,6 @@ async function checkResetPasswordTokenValidity(req,res)
     try
     {
         const resetPassword = await ResetPassword.findOne({_id:req.params.id})
-        console.log(resetPassword)
         if(!resetPassword)
         {
             throw new Error()
