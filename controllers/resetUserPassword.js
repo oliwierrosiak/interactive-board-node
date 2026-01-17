@@ -1,5 +1,16 @@
 import { ResetPassword, User } from "../db/dbConfig.js"
 
+const deleteResetPasswordToken = async(id)=>
+{
+    try
+    {
+        await ResetPassword.deleteOne({_id:id})
+    }
+    catch(ex)
+    {
+    }
+}
+
 async function resetUserPassword(req,res)
 {
     try
@@ -19,6 +30,7 @@ async function resetUserPassword(req,res)
         user.password = req.body.newPassword
         await user.save()
         res.sendStatus(200)
+        deleteResetPasswordToken(resetPassword._id)
     }
     catch(ex)
     {

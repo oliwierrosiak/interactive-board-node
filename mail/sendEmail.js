@@ -14,7 +14,7 @@ async function sendEmail({to,message,title})
       email: "notely.help@gmail.com",
       name: "Notely",
     },
-    to: [{ email: "oliwierrosiak07@gmail.com" }],
+    to: [{ email: to }],
     subject: title,
     htmlContent: message,
   });
