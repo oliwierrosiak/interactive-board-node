@@ -50,6 +50,9 @@ io.on('connection',(socket)=>{
     socket.on('titleUpdate',({noteId,title})=>{
         socket.to(noteId).emit('titleUpdated',title)
     })
+    socket.on('elementUpdate',({noteId,element})=>{
+        socket.to(noteId).emit('elementUpdated',element)
+    })
 })
 
 App.use(express.json())
