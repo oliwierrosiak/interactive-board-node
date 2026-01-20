@@ -56,6 +56,9 @@ io.on('connection',(socket)=>{
     socket.on('elementDelete',({noteId,id})=>{
         socket.to(noteId).emit('elementDeleted',id)
     })
+    socket.on('canvasUpdate',({canvas,noteId})=>{
+        socket.to(noteId).emit("canvasUpdated",canvas)
+    })
 })
 
 App.use(express.json())
