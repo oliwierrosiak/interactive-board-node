@@ -14,4 +14,6 @@ export const RefreshToken = mongoose.model('token',RefreshTokenModel)
 
 export const ResetPassword = mongoose.model('resetpassword',ResetPasswordModel)
 
-mongoose.connect(process.env.DATABASE)
+mongoose.connect(process.env.DATABASE,{
+    dbName:'notely'
+})

@@ -15,7 +15,8 @@ async function resetPassword(req,res)
         else
         {
             const resetPasswordObject = new ResetPassword({
-                email:req.body.email
+                email:req.body.email,
+                expireDate:new Date().getTime() + 900000
             })
             const saved = await resetPasswordObject.save()
 
