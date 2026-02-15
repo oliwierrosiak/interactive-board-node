@@ -14,7 +14,9 @@ export const io = new Server(server,{
     cors:{
         origin:[
             `http://localhost:3000`,
-            'http://192.168.0.100:3000'
+            'http://192.168.0.100:3000',
+            'https://notelyboard.web.app',
+            'https://notelyboard.firebaseapp.com'
         ],
         methods:['GET','POST'],
         credentials:true
@@ -30,7 +32,9 @@ App.use(cookieParser())
 App.use(cors({
     origin: [
         `http://localhost:3000`,
-        'http://192.168.0.100:3000'
+        'http://192.168.0.100:3000',
+        'https://notelyboard.web.app',
+        'https://notelyboard.firebaseapp.com',
     ],
     credentials: true
 }))
